@@ -1,7 +1,10 @@
 const express = require("express");
 const axios = require("axios");
+const cors = require("cors");
 const app = express();
+app.use(cors());
 require("dotenv").config();
+
 
 const API_KEY = process.env.API_KEY;
 const PORT = process.env.PORT;
@@ -11,7 +14,7 @@ app.get("/", (req, res) => {
 });
 
 //COMICS
-//Liste des comics 
+//Liste des comics
 
 app.get("/comics", async (req, res) => {
   try {
@@ -25,7 +28,7 @@ app.get("/comics", async (req, res) => {
 });
 
 //COMICS/CHARACTER_ID
-//Toutes les informations sur un personnage dans un comic spécifique 
+//Toutes les informations sur un personnage dans un comic spécifique
 
 app.get("/comics/:characterId", async (req, res) => {
   try {
@@ -39,7 +42,7 @@ app.get("/comics/:characterId", async (req, res) => {
 });
 
 //COMIC_ID
-//Toutes les informations sur un comic spécifique 
+//Toutes les informations sur un comic spécifique
 
 app.get("/comic/:comicId", async (req, res) => {
   try {
@@ -53,7 +56,7 @@ app.get("/comic/:comicId", async (req, res) => {
 });
 
 //CHARACTERS
-//Liste des personnages 
+//Liste des personnages
 
 app.get("/characters", async (req, res) => {
   try {
@@ -67,7 +70,7 @@ app.get("/characters", async (req, res) => {
 });
 
 //CHARACTER_ID
-//Récupérer les informations sur un personnage en particulier 
+//Récupérer les informations sur un personnage en particulier
 
 app.get("/character/:characterId", async (req, res) => {
   try {
