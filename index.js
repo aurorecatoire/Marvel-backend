@@ -28,9 +28,9 @@ app.get("/comics", async (req, res) => {
 
 app.get("/comics/:characterId", async (req, res) => {
   try {
-    const { characterID } = req.params;
+    const { characterId } = req.params;
     const result = await axios.get(
-      `https://lereacteur-marvel-api.herokuapp.com/comics/${characterID}?apiKey=${API_KEY}`
+      `https://lereacteur-marvel-api.herokuapp.com/comics/${characterId}?apiKey=${API_KEY}`
     );
     res.json(result.data);
   } catch (error) {
@@ -43,9 +43,9 @@ app.get("/comics/:characterId", async (req, res) => {
 
 app.get("/comic/:comicId", async (req, res) => {
   try {
-    const { comicID } = req.params;
+    const { comicId } = req.params;
     const result = await axios.get(
-      `https://lereacteur-marvel-api.herokuapp.com/comic/${comicID}?apiKey=${API_KEY}`
+      `https://lereacteur-marvel-api.herokuapp.com/comic/${comicId}?apiKey=${API_KEY}`
     );
     res.json(result.data);
   } catch (error) {
@@ -72,9 +72,9 @@ app.get("/characters", async (req, res) => {
 
 app.get("/character/:characterId", async (req, res) => {
   try {
-    const { characterID } = req.params;
+    const { characterId } = req.params;
     const result = await axios.get(
-      `https://lereacteur-marvel-api.herokuapp.com/character/${characterID}?apiKey=${API_KEY}`
+      `https://lereacteur-marvel-api.herokuapp.com/character/${characterId}?apiKey=${API_KEY}`
     );
     res.json(result.data);
   } catch (error) {
