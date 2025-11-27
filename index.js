@@ -3,15 +3,11 @@ const axios = require("axios");
 const cors = require("cors");
 const app = express();
 app.use(cors());
+app.use(express.json());
 require("dotenv").config();
-
 
 const API_KEY = process.env.API_KEY;
 const PORT = process.env.PORT;
-
-app.get("/", (req, res) => {
-  res.json({ message: "server on !" });
-});
 
 //COMICS
 //Liste des comics
@@ -23,7 +19,7 @@ app.get("/comics", async (req, res) => {
     );
     res.json(result.data);
   } catch (error) {
-    res.status(500).json({ error: "Erreur API" });
+    res.status(500).json({ message: error.message });
   }
 });
 
@@ -32,12 +28,13 @@ app.get("/comics", async (req, res) => {
 
 app.get("/comics/:characterId", async (req, res) => {
   try {
+    const { characterID } = req.params;
     const result = await axios.get(
-      `https://lereacteur-marvel-api.herokuapp.com/comics/5fc8ba1fdc33470f788f88b3?apiKey=${API_KEY}`
+      `https://lereacteur-marvel-api.herokuapp.com/comics/${characterID}?apiKey=${API_KEY}`
     );
     res.json(result.data);
   } catch (error) {
-    res.status(500).json({ error: "Erreur API" });
+    res.status(500).json({ message: error.message });
   }
 });
 
@@ -46,12 +43,13 @@ app.get("/comics/:characterId", async (req, res) => {
 
 app.get("/comic/:comicId", async (req, res) => {
   try {
+    const { comicID } = req.params;
     const result = await axios.get(
-      `https://lereacteur-marvel-api.herokuapp.com/comic/5fce13de78edeb0017c92d68?apiKey=${API_KEY}`
+      `https://lereacteur-marvel-api.herokuapp.com/comic/${comicID}?apiKey=${API_KEY}`
     );
     res.json(result.data);
   } catch (error) {
-    res.status(500).json({ error: "Erreur API" });
+    res.status(500).json({ message: error.message });
   }
 });
 
@@ -65,7 +63,7 @@ app.get("/characters", async (req, res) => {
     );
     res.json(result.data);
   } catch (error) {
-    res.status(500).json({ error: "Erreur API" });
+    res.status(500).json({ message: error.message });
   }
 });
 
@@ -74,13 +72,18 @@ app.get("/characters", async (req, res) => {
 
 app.get("/character/:characterId", async (req, res) => {
   try {
+    const { characterID } = req.params;
     const result = await axios.get(
-      `https://lereacteur-marvel-api.herokuapp.com/character/5fcf91f4d8a2480017b91453?apiKey=${API_KEY}`
+      `https://lereacteur-marvel-api.herokuapp.com/character/${characterID}?apiKey=${API_KEY}`
     );
     res.json(result.data);
   } catch (error) {
-    res.status(500).json({ error: "Erreur API" });
+    res.status(500).json({ message: error.message });
   }
+});
+
+app.all(/.*/, (req, res) => {
+  res.status(404).json({ message: "This route does not exist" });
 });
 
 app.listen(PORT, () => {
