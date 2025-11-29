@@ -60,8 +60,8 @@ app.get("/comic/:comicId", async (req, res) => {
 
 app.get("/characters", async (req, res) => {
   try {
-    const limit = number(req.query.limit) || 100;
-    const skip = number(req.query.skip) || 0;
+    const limit = Number(req.query.limit) || 100;
+    const skip = Number(req.query.skip) || 0;
     const result = await axios.get(
       `https://lereacteur-marvel-api.herokuapp.com/characters?apiKey=${API_KEY}&skip=${skip}&limit=${limit}`
     );
